@@ -2,7 +2,7 @@
     if(isset($_SESSION['user']))
     {
         $username=$_SESSION['user'];
-        $tbl_name="tbl_app";
+        $tbl_name="tbl_admin";
         $where="username='$username'";
         $query=$obj->select_data($tbl_name,$where);
         $res=$obj->execute_query($conn,$query);
@@ -10,8 +10,8 @@
         if($count_rows==1)
         {
             $row=$obj->fetch_data($res);
-            $app_id=$row['app_id'];
-            $app_name=$row['app_name'];
+            $admin_id=$row['admin_id'];
+            $admin_name=$row['admin_name'];
             $email=$row['email'];
             $username=$row['username'];
             $password=$row['password'];
@@ -34,7 +34,7 @@
                 <div class="report">
                     <!--
                     <form method="post" action="" class="forms">
-                        <h2>Update App Details</h2>
+                        <h2>Update admin Details</h2>
                         -->
                         <?php 
                             if(isset($_SESSION['update']))
@@ -59,8 +59,8 @@
                             }
                         ?>
                         <!--
-                        <span class="name">App Name</span>
-                        <input type="text" name="app_name" value="<?php echo $app_name; ?>" required="true" /><br />
+                        <span class="name">admin Name</span>
+                        <input type="text" name="admin_name" value="<?php echo $admin_name; ?>" required="true" /><br />
                         
                         <span class="name">Email</span>
                         <input type="email" name="email" value="<?php echo $email; ?>" required="true" /><br />
@@ -86,38 +86,38 @@
                         if(isset($_POST['submit']))
                         {
                             //echo "Clicked";
-                           $app_name=$obj->sanitize($conn,$_POST['app_name']);
+                           $admin_name=$obj->sanitize($conn,$_POST['admin_name']);
                            $email=$obj->sanitize($conn,$_POST['email']);
                            $username=$obj->sanitize($conn,$_POST['username']);
                            $contact=$obj->sanitize($conn,$_POST['contact']);
                            $current_password=$obj->sanitize($conn,$_POST['current_password']);
                            
                            //Normal Validation
-                           if(($app_name=="")or($email=="")or($username=="")or($contact=="")or($current_password==""))
+                           if(($admin_name=="")or($email=="")or($username=="")or($contact=="")or($current_password==""))
                            {
-                                $_SESSION['validation']="<div class='error'>App Name or Email or Username or Contact or Password is Empty.</div>";
+                                $_SESSION['validation']="<div class='error'>admin Name or Email or Username or Contact or Password is Empty.</div>";
                                 header('location:'.SITEURL.'admin/index.php?page=settings');
                            }
                            if($current_password==$password)
                            {
-                                $tbl_name="tbl_app";
+                                $tbl_name="tbl_admin";
                             $data="
-                                app_name='$app_name',
+                                admin_name='$admin_name',
                                 email='$email',
                                 username='$username',
                                 contact='$contact'
                             ";
-                            $where="app_id=$app_id";
+                            $where="admin_id=$admin_id";
                             $query=$obj->update_data($tbl_name,$data,$where);
                             $res=$obj->execute_query($conn,$query);
                             if($res===true)
                             {
-                                $_SESSION['update']="<div class='success'>App details successfully updated.</div>";
+                                $_SESSION['update']="<div class='success'>admin details successfully updated.</div>";
                                 header('location:'.SITEURL.'admin/index.php?page=settings');
                             }
                             else
                             {
-                                $_SESSION['update']="<div class='error'>Failed to update app details.</div>";
+                                $_SESSION['update']="<div class='error'>Failed to update admin details.</div>";
                                 header('location:'.SITEURL.'admin/index.php?page=settings');
                             }
                            }
@@ -160,9 +160,9 @@
                             {
                                 if($new_password==$confirm_password)
                                 {
-                                    $tbl_name='tbl_app';
+                                    $tbl_name='tbl_admin';
                                     $data="password='$new_password'";
-                                    $where="app_id='$app_id'";
+                                    $where="admin_id='$admin_id'";
                                     $query=$obj->update_data($tbl_name,$data,$where);
                                     $res=$obj->execute_query($conn,$query);
                                     if($res==true)

@@ -39,10 +39,11 @@
                         
                         if(($username=="")or($password=""))
                         {
+                            //display validation message
                             $_SESSION['validation']="<div class='error'>Username or Password is Empty</div>";
                             header('location:'.SITEURL.'admin/login.php');
                         }
-                        $tbl_name="tbl_app";
+                        $tbl_name="tbl_admin";
                         $where="username='$username' AND password='$password_db'";
                         $query=$obj->select_data($tbl_name,$where);
                         $res=$obj->execute_query($conn,$query);

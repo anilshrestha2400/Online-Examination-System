@@ -18,7 +18,7 @@
                     ?>
                     
                     <div class="clearfix">
-                        <a href="<?php echo SITEURL; ?>admin/index.php?page=students">
+                        <a href="<?php echo SITEURL; ?>admin/index.php?page=students">  <!--to display from database-->
                             <div class="dash-tile">
                                 
                                 <h1><?php echo $obj->get_total_rows('tbl_student',$conn); ?></h1>

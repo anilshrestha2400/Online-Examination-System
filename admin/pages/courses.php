@@ -34,7 +34,7 @@
                         </tr>
                         
                         <?php 
-                            //Getting all the faculties from database
+                            //Getting all the courses from database
                             $tbl_name="tbl_course ORDER BY course_id DESC";
                             $query=$obj->select_data($tbl_name);
                             $res=$obj->execute_query($conn,$query);

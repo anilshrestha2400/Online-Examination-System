@@ -3,7 +3,7 @@
             if(isset($_GET['id']))
             {
                 $faculty_id=$_GET['id'];
-                //Getting VAlues fro the datadabase
+                //Getting VAlues from the datadabase
                 $tbl_name="tbl_faculty";
                 $where="faculty_id=$faculty_id";
                 $query=$obj->select_data($tbl_name,$where);
